@@ -13,7 +13,15 @@
  * @returns {boolean} - deberia retornar true o false.
  */
 
-function BinaryToDecimal(binary, base) {}
+function BinaryToDecimal(binary, base) {
+  let decimal = 0;
+
+  for (let i = 0; i < binary.length; i++) {
+    decimal = decimal + binary[i] * base ** (binary.length - 1 - i);
+  }
+
+  return decimal;
+}
 
 // ------------------EJERCICIO II----------------------------//
 
@@ -27,7 +35,18 @@ function BinaryToDecimal(binary, base) {}
  * @returns {boolean} - deberia retornar true o false.
  */
 
-function same(arr1, arr2) {}
+function same(arr1, arr2) {
+  if (arr1.length !== arr2.length) {
+    return false;
+  } else {
+    for (let i = 0; i < arr1.length; i++) {
+      if (arr1[i] !== arr2[i] ** 2) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
 
 // ------------------EJERCICIO III---------------------------//
 /**
@@ -43,24 +62,37 @@ function same(arr1, arr2) {}
  * @returns {boolean} - deberia retornar true o false.
  */
 
-function validAnagram(first, second) {}
+function validAnagram(first, second) {
+  if (first.length !== second.length) return false;
+
+  let newStr1 = first.split("").sort().join("");
+  let newStr2 = second.split("").sort().join("");
+  if (newStr1 === newStr2) return true;
+  else return false;
+}
 
 // ------------------EJERCICIO IV---------------------------//
 /**
  * Escribe una function llamada sumZero que acepte un array de numeros
- * enteros ordenado. La function deberia encontrar el primer para de
- * numeros que sumados den 0. Retorna un array que incluya los dos
+ * enteros ordenado. La function deberia encontrar el primer par de
+ * numeros que sumados den 0. Retornar un array que incluya los dos
  * numeros encontrados o undefined si el par no existe..
  * @param {Array} arr1 - esto es un array.
  * @returns {Array || undefined} - deberia retornar un array o undefined.
  */
 
-function sumZero(arr) {}
+function sumZero(arr) {
+  for (i = 0; i < arr.length - 1; i++) {
+    for (j = i + 1; j < arr.length; j++) {
+      if (arr[i] + arr[j] === 0) return [arr[i], arr[j]];
+    }
+  }
+  return undefined;
+}
 
 // ------------------EJERCICIO V------------------------------//
 /**
- * Escribe una funcion que reciba un array y un numero promedio. 
- * Determina si dentro del array dos numeros dan el promedio pasado.
+ * Escribe una funcion que reciba un array y un numero.
  * Deberia retornar true si dos numeros sumados dentro del array 
  * es igual al num pasado.
 
@@ -68,7 +100,22 @@ function sumZero(arr) {}
  * @returns {Array || undefined} - deberia retornar un array o undefined.
  */
 
-function averagePair(arr, num) {}
+function averagePair(arr, num) {
+  arr = arr.sort(function (a, b) {
+    return a - b;
+  });
+  let i = 0;
+  let j = arr.length - 1;
+  while (arr[i] + arr[j] !== num && i < j) {
+    if (arr[i] + arr[j] < num) i++;
+    if (arr[i] + arr[j] > num) j--;
+  }
+  if (arr[i] + arr[j] === num) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 // ------------------EJERCICIO VI------------------------------//
 /**
@@ -82,7 +129,11 @@ function averagePair(arr, num) {}
  * @returns {Array || undefined} - deberia retornar un array o undefined.
  */
 
-function recursiveRange(num) {}
+function recursiveRange(num) {
+  if (num === 0) return 0;
+
+  return recursiveRange(num - 1) + num;
+}
 
 // ------------------EJERCICIO VII------------------------------//
 /**
@@ -94,7 +145,12 @@ function recursiveRange(num) {}
  * @returns {Number} - deberia retornar un number.
  */
 
-function productOfArray(arr) {}
+function productOfArray(arr) {
+  if (arr.length === 1) return arr[0];
+  const [first, ...rest] = arr;
+
+  return first * productOfArray(rest);
+}
 
 // ------------------EJERCICIO VIII------------------------------//
 /**
